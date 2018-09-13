@@ -20,7 +20,7 @@ public class Curso {
     public Curso(String nombre, Integer codCurso, Integer cupoAlumnos) {
         this.nombre = nombre;
         this.codCurso = codCurso;
-        this.cupoAlumnos= cupoAlumnos;
+        this.cupoAlumnos = cupoAlumnos;
     }
 
     //GETTER/SETTER
@@ -45,22 +45,23 @@ public class Curso {
     //METODOS
     @Override
 
-    public boolean equals (Object obj){
+    public boolean equals(Object obj) {
         Curso nuevoCurso = (Curso) obj;
         return this.codCurso.equals(nuevoCurso.getCodCurso());
     }
+
     @Override
 
-    public int hashCode(){
+    public int hashCode() {
         return codCurso.hashCode();
     }
 
-    public Boolean agregarAlumno (Alumno unAlumno){
+    public Boolean agregarAlumno(Alumno unAlumno) {
         Integer nroAlumnos = 0;
-        for (Integer i = 0; i < alumnosInscriptos.size(); i++){
-            System.out.println(nroAlumnos + 1);
+        for (Integer i = 0; i < alumnosInscriptos.size(); i++) {
+            nroAlumnos = nroAlumnos + 1;
         }
-        if (nroAlumnos < cupoAlumnos){
+        if (nroAlumnos < getCupoAlumnos() && verificarAlumno(unAlumno)) {
             alumnosInscriptos.add(unAlumno);
             return true;
         } else {
@@ -69,11 +70,18 @@ public class Curso {
 
 
     }
+
     //AGREGAR METODO QUE VERIFIQUE SI EL ALUMNO NO ESTA PREVIAMENTE INSCRIPTO
-    public void eliminarAlumno (Alumno unAlumno){
+    public void eliminarAlumno(Alumno unAlumno) {
         alumnosInscriptos.remove(unAlumno);
-        System.out.println( unAlumno + " ya no esta inscripto en el curso");
+        System.out.println(unAlumno + " ya no esta inscripto en el curso");
 
 
     }
+
+    public Boolean verificarAlumno(Alumno unAlumno) {
+       return !alumnosInscriptos.contains(unAlumno);
+
+    }
+
 }
