@@ -39,11 +39,22 @@ public class Main {
 
         //Dar de baja un profesor
 
-        dhManager.bajaProfesorAdjunto(3);
+        dhManager.bajaProfesor(3);
 
         //Dar de baja un curso
 
         dhManager.bajaCurso(20001);
+
+
+
+        //EXPORTAR ALUMNOS
+        dhManager.leerCSV();
+
+
+        /* Agregar un metodo a la clase alumno que permita registrar en un Array<List> los cursos
+        a los que se inscribe, y otro metodo en la clase DHManager que recorra la lista de inscripciones y
+        busque al alumno por su codigo de alumno y le informe las inscripciones al alumno*/
+
 
 
 
