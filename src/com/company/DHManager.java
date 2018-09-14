@@ -9,8 +9,11 @@ public class DHManager {
     private List<Profesor> listaProfesores = new ArrayList<>();
     private List<Curso> listaCursos = new ArrayList<>();
     private List<Inscripcion> listaInscripciones = new ArrayList<>();
+    private LectorDeArchivosCSV listaNueva = new LectorDeArchivosCSV();
+
 
     //CONSTRUCTOR
+    public List<String[]> listaCSV = listaNueva.alumnosCSV();
 
     //GETTER/SETTER
 
@@ -40,21 +43,11 @@ public class DHManager {
         listaProfesores.add(profesorT);
         System.out.println("Alta profesor titular exitosa");
     }
-
-    public void bajaProfesorTitular(Integer codProfesor) {
-        for (Profesor profesorTitular: listaProfesores) {
-            if (profesorTitular.getCodProfesor().equals(codProfesor)) {
+    public void bajaProfesor(Integer codProfesor) {
+        for (Profesor profesor: listaProfesores) {
+            if (profesor.getCodProfesor().equals(codProfesor)) {
                 listaProfesores.remove(codProfesor);
                 System.out.println(codProfesor + " ya no esta inscripto en el curso");
-            }
-        }
-
-    }
-    public void bajaProfesorAdjunto(Integer codProfesorAdjunto) {
-        for (Profesor profesorAdjunto: listaProfesores) {
-            if (profesorAdjunto.getCodProfesor().equals(codProfesorAdjunto)) {
-                listaProfesores.remove(codProfesorAdjunto);
-                System.out.println(codProfesorAdjunto + " ya no esta inscripto en el curso");
             }
         }
 
@@ -89,11 +82,14 @@ public class DHManager {
             Inscripcion nuevaInscripcion = new Inscripcion(nuevoAlumno, unNuevoCurso);
             listaInscripciones.add(nuevaInscripcion);
             System.out.println("Inscripcion exitosa");
-        } else if(unNuevoCurso == null) {
+        } else
+            if(unNuevoCurso == null) {
             System.out.println("No existe el curso");
-        } else if (nuevoAlumno == null){
+        } else
+            if (nuevoAlumno == null){
             System.out.println("No existe el alumno");
-        }  else if (unNuevoCurso.agregarAlumno(nuevoAlumno) == Boolean.FALSE){
+        }  else
+            if (unNuevoCurso.agregarAlumno(nuevoAlumno) == Boolean.FALSE){
             System.out.println("El curso esta completo. No se puede inscribir el alumno");
         }
 
@@ -132,13 +128,45 @@ public class DHManager {
             listaProfesores.add(nuevoProfesorTitular);
             listaProfesores.add(nuevoProfesorAdjunto);
             System.out.println("Asignacion exitosa");
-        } else if (cursoNuevo == null){
+        } else
+            if (cursoNuevo == null){
             System.out.println("El curso no existe");
-        } else if (nuevoProfesorAdjunto == null){
+        } else
+            if (nuevoProfesorAdjunto == null){
             System.out.println("El profesor adjunto no existe");
-        } else if (nuevoProfesorTitular == null) {
-            System.out.println("El profesro Titular no existe");
+        } else
+            if (nuevoProfesorTitular == null) {
+            System.out.println("El profesor Titular no existe");
         }
+
+    }
+
+   public void leerCSV (){
+        for (String[] valor : listaCSV){
+            String a = valor[0];
+            String b = valor[1];
+            String c = valor[2];
+
+            Integer d = Integer.parseInt(a);
+
+            for (Integer i=0; i < valor.length; i++){
+                Alumno nuevoAlumno = new Alumno(b,c,d);
+                listaAlumnos.add(nuevoAlumno);
+                System.out.println("Nuevo alumno CVS creado");
+
+
+
+            }
+
+
+            /*Alumno nuevoAlumno = new Alumno (alumnos);
+            listaAlumnos.add(nuevoAlumno);*/
+
+
+
+        }
+
+
 
     }
 }

@@ -10,23 +10,25 @@ import com.opencsv.CSVReaderBuilder;
 
 
 public class LectorDeArchivosCSV {
-        public static void main(String args[]) {
+
+
+        public List<String[]> alumnosCSV() {
             CSVReader csvReader = null;
+            List<String[]> datosAlumno = new ArrayList<>();
 
             try {
 
                 csvReader = new CSVReader(new FileReader("listadoDeAlumnos.csv"), ',', '"', 1);
 
-                String[] alumnos = null;
 
-                List<String[]> datosAlumno = new ArrayList<String[]>();
+
                 datosAlumno = csvReader.readAll();
 
-                for (String[] row : datosAlumno) {
-                    System.out.println(Arrays.toString(row));
-                }
+
             } catch (Exception ee) {
                 ee.printStackTrace();
             }
+            return datosAlumno;
         }
+
     }
